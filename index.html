@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact submissions</title>
+    <link rel="stylesheet" href="dist/main.css" />
+  </head>
+  <body>
+    <!-- Skip link for keyboard users — jumps past the header to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+      <div class="container">
+        <h1 class="site-header__title">Contact submissions</h1>
+      </div>
+    </header>
+
+    <main id="main-content" class="container">
+      <!-- Form section -->
+      <section aria-labelledby="form-heading">
+        <h2 id="form-heading">Add a new contact</h2>
+
+        <!--
+        Error summary — hidden by default, shown on failed validation.
+        role="alert" so screen readers announce it when it appears.
+        We also move focus here programmatically on submit failure.
+      -->
+        <div
+          id="error-summary"
+          class="error-summary"
+          role="alert"
+          aria-labelledby="error-summary-heading"
+          hidden
+        >
+          <h3 id="error-summary-heading">There is a problem</h3>
+          <ul id="error-summary-list" class="error-summary__list">
+            <!-- Error links injected here by JS -->
+          </ul>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <div class="form-field" id="field-name">
+            <label class="form-field__label" for="input-name">Full name</label>
+            <span class="form-field__error" id="error-name" hidden></span>
+            <input
+              class="form-field__input"
+              id="input-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              aria-describedby="error-name"
+            />
+          </div>
+
+          <div class="form-field" id="field-email">
+            <label class="form-field__label" for="input-email">Email address</label>
+            <span class="form-field__error" id="error-email" hidden></span>
+            <input
+              class="form-field__input"
+              id="input-email"
+              name="email"
+              type="text"
+              autocomplete="email"
+              aria-describedby="error-email"
+            />
+          </div>
+
+          <div class="form-field" id="field-dob">
+            <label class="form-field__label" for="input-dob">Date of birth</label>
+            <span class="form-field__hint" id="hint-dob">For example, 27 03 1990</span>
+            <span class="form-field__error" id="error-dob" hidden></span>
+            <input
+              class="form-field__input form-field__input--date"
+              id="input-dob"
+              name="dob"
+              type="text"
+              placeholder="DD/MM/YYYY"
+              autocomplete="bday"
+              aria-describedby="hint-dob error-dob"
+            />
+          </div>
+
+          <div class="form-field" id="field-phone">
+            <label class="form-field__label" for="input-phone">Phone number</label>
+            <span class="form-field__error" id="error-phone" hidden></span>
+            <input
+              class="form-field__input"
+              id="input-phone"
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+              aria-describedby="error-phone"
+            />
+          </div>
+
+          <button type="submit" class="btn btn--primary">Submit</button>
+        </form>
+      </section>
+
+      <!-- Submissions list -->
+      <section aria-labelledby="submissions-heading" class="submissions-section">
+        <h2 id="submissions-heading">Submissions</h2>
+
+        <!--
+        Live region: announces changes (add/remove) to screen readers
+        without stealing focus from whatever the user is doing.
+      -->
+        <div id="submissions-status" class="visually-hidden" aria-live="polite"></div>
+
+        <p id="no-submissions" class="submissions-empty" hidden>
+          No submissions yet. Use the form above to add one.
+        </p>
+
+        <ul
+          id="submissions-list"
+          class="submissions-list"
+          aria-label="Submitted contacts"
+        >
+          <!-- Submission items rendered here by JS -->
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="container site-footer__inner">
+        <!-- Placeholder — update with your real name and LinkedIn URL -->
+        <span class="site-footer__name">[Your Name]</span>
+        <span class="site-footer__date" id="footer-date"></span>
+        <a
+          class="site-footer__link"
+          href="https://linkedin.com/in/yourprofile"
+          target="_blank"
+          rel="noopener noreferrer"
+          >LinkedIn</a
+        >
+      </div>
+    </footer>
+
+    <!--
+    Using type="module" so we get native ES module support.
+    All target browsers (modern Chrome, Firefox, Safari, Edge) support this.
+  -->
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

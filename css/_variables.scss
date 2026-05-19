@@ -1,0 +1,40 @@
+// Colour palette — kept small and intentional.
+// Using CSS custom properties so they're easy to override or theme later.
+:root {
+  --color-black: #0b0c0c;
+  --color-white: #ffffff;
+  --color-grey-dark: #505a5f;
+  --color-grey-mid: #b1b4b6;
+  --color-grey-light: #f3f2f1;
+
+  --color-blue: #1d70b8;
+  --color-blue-hover: #144e81;
+  --color-green: #00703c;
+  --color-green-hover: #005a30;
+  --color-red: #d4351c;
+  --color-red-light: #fef2f2;
+  --color-yellow-focus: #ffdd00;
+
+  // Spacing scale — consistent vertical rhythm
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-xxl: 3rem;
+
+  // Typography
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-size-body: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --line-height-body: 1.6;
+
+  // Layout
+  --max-width: 42rem;
+  --border-radius: 4px;
+  --input-border: 2px solid var(--color-black);
+  --focus-outline: 3px solid var(--color-yellow-focus);
+}
