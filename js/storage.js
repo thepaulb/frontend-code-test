@@ -37,7 +37,12 @@ export function addSubmission(data) {
 
   const existing = getSubmissions();
   existing.unshift(submission);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+  } catch {
+    // Storage unavailable — submission still returned for in-memory use
+    console.warn('Could not save to localStorage');
+  }
 
   return submission;
 }
@@ -51,8 +56,12 @@ export function removeSubmission(id) {
   const filtered = existing.filter((item) => item.id !== id);
 
   if (filtered.length === existing.length) return false;
-
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+  } catch {
+    // Storage unavailable
+    console.warn('Could not save to localStorage');
+  }
   return true;
 }
 

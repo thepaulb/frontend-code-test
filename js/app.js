@@ -111,6 +111,17 @@ function handleRemove(event) {
   removeSubmission(id);
   renderSubmissions(getSubmissions(), submissionsList, noSubmissions);
   announceChange(`${name} removed from submissions`);
+
+  const remaining = submissionsList.querySelectorAll('.submission-card');
+
+  // Move focus to a logical destination — the firstitem in the list …
+  if (remaining.length > 0) {
+    remaining[0].querySelector('.btn--danger')?.focus();
+  } else {
+    // or the submissions heading
+    document.getElementById('submissions-heading').setAttribute('tabindex', '-1');
+    document.getElementById('submissions-heading').focus();
+  }
 }
 
 /**
@@ -141,12 +152,12 @@ function showErrors(errors) {
 
     // Visual error state on the field wrapper
     document.getElementById(config.fieldId).classList.add('form-field--error');
+    // ARIA invalid state on the input for screen readers
+    document.getElementById(config.inputId).setAttribute('aria-invalid', 'true');
   });
 
   // Move focus to the summary so screen readers read out the errors
   errorSummary.focus();
-  // tabindex=-1 allows programmatic focus on a non-interactive element
-  errorSummary.setAttribute('tabindex', '-1');
 }
 
 /**
@@ -156,11 +167,12 @@ function clearErrors() {
   errorSummary.hidden = true;
   errorSummaryList.innerHTML = '';
 
-  Object.values(FIELD_CONFIG).forEach(({ errorId, fieldId }) => {
+  Object.values(FIELD_CONFIG).forEach(({ errorId, fieldId, inputId }) => {
     const errorSpan = document.getElementById(errorId);
     errorSpan.textContent = '';
     errorSpan.hidden = true;
     document.getElementById(fieldId).classList.remove('form-field--error');
+    document.getElementById(inputId).removeAttribute('aria-invalid');
   });
 }
 
