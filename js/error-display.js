@@ -36,6 +36,10 @@ export function showErrors(errors, errorSummary, errorSummaryList, FIELD_CONFIG)
     // ARIA invalid state on the input for screen readers
     document.getElementById(config.inputId).setAttribute('aria-invalid', 'true');
   });
+
+  // Move focus to the summary so the user hears the errors
+  // and can Tab through the links to each invalid field
+  errorSummary.focus();
 }
 
 /**
