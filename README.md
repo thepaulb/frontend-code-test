@@ -42,6 +42,8 @@ Unit tests cover each module in isolation, `validation`, `storage` and `submissi
 
 Anything beyond unit tests (e.g. end-to-end tests) seemed disproportionate for a project of this size.
 
+Supported browsers: as per [Designing for different browsers and devices \- Service Manual \- GOV.UK](https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices)
+
 I have used Lighthouse for quality/performance audit to enforce basic performance, accessibility, and SEO standards. Although I'm aware this is no substitute for RUM via CrUX, etc. The results are in: `reports`.
 
 NOTE: The 90% score for SEO is a result of lack of metadata.
