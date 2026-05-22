@@ -1,6 +1,7 @@
 {
   "name": "contact-submissions",
   "version": "1.0.0",
+  "private": true,
   "description": "Single-page contact form with client-side validation and submission management",
   "scripts": {
     "build:css": "sass css/main.scss dist/main.css",

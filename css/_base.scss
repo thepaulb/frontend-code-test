@@ -16,7 +16,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: 700;
   line-height: 1.25;
 }
@@ -75,10 +77,4 @@ a {
   &:focus {
     top: var(--space-sm);
   }
-}
-
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-md);
 }

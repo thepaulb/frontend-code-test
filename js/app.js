@@ -9,14 +9,19 @@
 import { validateForm } from './validation.js';
 import { getSubmissions, addSubmission, removeSubmission } from './storage.js';
 import { renderSubmissions } from './submission-list.js';
+import { showErrors, clearErrors } from './error-display.js';
 
 // Cache DOM references once on load
 const form = document.getElementById('contact-form');
-const errorSummary = document.getElementById('error-summary');
-const errorSummaryList = document.getElementById('error-summary-list');
 const submissionsList = document.getElementById('submissions-list');
 const noSubmissions = document.getElementById('no-submissions');
 const statusRegion = document.getElementById('submissions-status');
+const errorSummary = document.getElementById('error-summary');
+const errorSummaryList = document.getElementById('error-summary-list');
+
+// Delay before clearing the live region to allow
+// screen readers to announce changes
+const SR_ANNOUNCE_CLEAR_MS = 5000;
 
 // Field config: maps field names to their DOM IDs for error handling.
 // Centralised here so we don't repeat these strings everywhere.
@@ -66,20 +71,20 @@ function loadExistingSubmissions() {
  */
 function handleSubmit(event) {
   event.preventDefault();
-  clearErrors();
+  clearErrors(errorSummaryList, FIELD_CONFIG);
 
   // Read form values
   const data = {
-    name: form.elements['name'].value,
-    email: form.elements['email'].value,
-    dob: form.elements['dob'].value,
-    phone: form.elements['phone'].value,
+    name: form.elements['name'].value.trim(),
+    email: form.elements['email'].value.trim(),
+    dob: form.elements['dob'].value.trim(),
+    phone: form.elements['phone'].value.trim(),
   };
 
   const errors = validateForm(data);
 
   if (Object.keys(errors).length > 0) {
-    showErrors(errors);
+    showErrors(errors, errorSummary, errorSummaryList, FIELD_CONFIG);
     return;
   }
 
@@ -91,7 +96,11 @@ function handleSubmit(event) {
 
   // Move focus to the new submission so the user sees it
   const newCard = submissionsList.querySelector(`[data-id="${submission.id}"]`);
-  if (newCard) newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  if (newCard) {
+    newCard.setAttribute('tabindex', '-1');
+    newCard.focus();
+    newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 /**
@@ -125,58 +134,6 @@ function handleRemove(event) {
 }
 
 /**
- * Displays validation errors in the summary and inline on each field.
- * Moves focus to the error summary so screen readers announce the problems.
- */
-function showErrors(errors) {
-  errorSummary.hidden = false;
-  errorSummaryList.innerHTML = '';
-
-  // Build the error summary links and mark up inline errors
-  Object.entries(errors).forEach(([field, message]) => {
-    const config = FIELD_CONFIG[field];
-    if (!config) return;
-
-    // Error summary: link that jumps to the relevant input
-    const li = document.createElement('li');
-    const link = document.createElement('a');
-    link.href = `#${config.inputId}`;
-    link.textContent = message;
-    li.appendChild(link);
-    errorSummaryList.appendChild(li);
-
-    // Inline error on the field
-    const errorSpan = document.getElementById(config.errorId);
-    errorSpan.textContent = message;
-    errorSpan.hidden = false;
-
-    // Visual error state on the field wrapper
-    document.getElementById(config.fieldId).classList.add('form-field--error');
-    // ARIA invalid state on the input for screen readers
-    document.getElementById(config.inputId).setAttribute('aria-invalid', 'true');
-  });
-
-  // Move focus to the summary so screen readers read out the errors
-  errorSummary.focus();
-}
-
-/**
- * Clears all error states from the form.
- */
-function clearErrors() {
-  errorSummary.hidden = true;
-  errorSummaryList.innerHTML = '';
-
-  Object.values(FIELD_CONFIG).forEach(({ errorId, fieldId, inputId }) => {
-    const errorSpan = document.getElementById(errorId);
-    errorSpan.textContent = '';
-    errorSpan.hidden = true;
-    document.getElementById(fieldId).classList.remove('form-field--error');
-    document.getElementById(inputId).removeAttribute('aria-invalid');
-  });
-}
-
-/**
  * Announces a change to screen readers via the live region.
  * The message is set, then cleared after a short delay to allow re-announcement
  * if the same action happens again.
@@ -185,7 +142,7 @@ function announceChange(message) {
   statusRegion.textContent = message;
   setTimeout(() => {
     statusRegion.textContent = '';
-  }, 1000);
+  }, SR_ANNOUNCE_CLEAR_MS);
 }
 
 // Boot the app

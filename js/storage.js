@@ -41,6 +41,8 @@ export function addSubmission(data) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
   } catch {
     // Storage unavailable — submission still returned for in-memory use
+    // Console warning supressed
+    // eslint-disable-next-line no-console
     console.warn('Could not save to localStorage');
   }
 
@@ -59,7 +61,8 @@ export function removeSubmission(id) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
   } catch {
-    // Storage unavailable
+    // Storage unavailable - console warning supressed
+    // eslint-disable-next-line no-console
     console.warn('Could not save to localStorage');
   }
   return true;

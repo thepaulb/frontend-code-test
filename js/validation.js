@@ -73,7 +73,10 @@ export function validateDob(value) {
   }
 
   // Must be in the past
-  if (date >= new Date()) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (date >= today) {
     return 'Date of birth must be in the past';
   }
 

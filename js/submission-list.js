@@ -17,7 +17,7 @@ export function renderSubmissions(submissions, listElement, emptyElement) {
 
   // Clear and re-render. For a list this size, full re-render is fine —
   // we'd only optimise with targeted updates if we had hundreds of items.
-  listElement.innerHTML = '';
+  listElement.replaceChildren();
 
   submissions.forEach((submission) => {
     const li = createSubmissionCard(submission);

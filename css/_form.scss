@@ -20,7 +20,7 @@
     width: 100%;
     padding: var(--space-sm);
     border: var(--input-border);
-    border-radius: 0; // sharp corners — deliberate, matches GDS input style
+    border-radius: 0; // sharp corners — deliberate
     font-family: inherit;
     font-size: var(--font-size-body);
 
@@ -82,7 +82,7 @@
   font-size: var(--font-size-body);
   font-weight: 700;
   border: 2px solid transparent;
-  border-radius: 0;
+  border-radius: 0; // sharp corners — deliberate
   cursor: pointer;
   text-decoration: none;
 
