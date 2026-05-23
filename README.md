@@ -40,6 +40,8 @@ Built with vanilla HTML, CSS (via Sass) and ES6+ JavaScript, no frameworks, no c
 
 Unit tests cover each module in isolation, `validation`, `storage` and `submission-list`, using **Jest** with a **jsdom** environment. This gives fast, DOM-capable tests without needing a real browser. Babel (`@babel/plugin-transform-modules-commonjs`) transpiles ES module syntax to CommonJS so Jest can consume the source files directly.
 
+NOTE: there is no test for the `crypto.randomUUID()` in `storage.js`.
+
 Anything beyond unit tests (e.g. end-to-end tests) seemed disproportionate for a project of this size.
 
 Supported browsers: as per [Designing for different browsers and devices \- Service Manual \- GOV.UK](https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices)

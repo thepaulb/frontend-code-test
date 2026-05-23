@@ -104,9 +104,7 @@ describe('validatePhone', () => {
   });
 
   test('returns error for non-UK format', () => {
-    expect(validatePhone('+1 555 123 4567')).toBe(
-      'Enter a valid UK phone number',
-    );
+    expect(validatePhone('+1 555 123 4567')).toBe('Enter a valid UK phone number');
   });
 
   test('returns null for valid UK mobile', () => {
