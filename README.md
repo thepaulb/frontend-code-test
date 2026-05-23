@@ -40,7 +40,9 @@ Built with vanilla HTML, CSS (via Sass) and ES6+ JavaScript, no frameworks, no c
 
 Unit tests cover each module in isolation, `validation`, `storage` and `submission-list`, using **Jest** with a **jsdom** environment. This gives fast, DOM-capable tests without needing a real browser. Babel (`@babel/plugin-transform-modules-commonjs`) transpiles ES module syntax to CommonJS so Jest can consume the source files directly.
 
-NOTE: there is no test for the `crypto.randomUUID()` in `storage.js`.
+**Code coverage**
+- There is no test for the `crypto.randomUUID()` in `storage.js` as jsdom doesn't support the crypto API.
+- The two `console.warn` statements are not included.
 
 Anything beyond unit tests (e.g. end-to-end tests) seemed disproportionate for a project of this size.
 
@@ -49,13 +51,6 @@ Supported browsers: as per [Designing for different browsers and devices \- Serv
 I have used Lighthouse for quality/performance audit to enforce basic performance, accessibility, and SEO standards. Although I'm aware this is no substitute for RUM via CrUX, etc. The results are in: `reports`.
 
 NOTE: The 90% score for SEO is a result of lack of metadata.
-
-**Environment settings**
-
-| Concern | Setting |
-| :---- | :---- |
-| CPU | 6x slowdown |
-| Network | Slow 4G |
 
 Screen Reader functionality was tested via Apple's built‑in screen reader VoiceOver.
 
