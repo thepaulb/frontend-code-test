@@ -38,7 +38,7 @@ Built with vanilla HTML, CSS (via Sass) and ES6+ JavaScript, no frameworks, no c
 
 ## Testing
 
-Unit tests cover each module in isolation, `validation`, `storage`, `submission-list` and `error-display`, using **Jest** with a **jsdom** environment. This gives fast, DOM-capable tests without needing a real browser. Babel (`@babel/plugin-transform-modules-commonjs`) transpiles ES module syntax to CommonJS so Jest can consume the source files directly.
+Unit tests cover each module in isolation; `validation`, `storage`, `submission-list` and `error-display`, using **Jest** with a **jsdom** environment. This gives fast, DOM-capable tests without needing a real browser. Babel (`@babel/plugin-transform-modules-commonjs`) transpiles ES module syntax to CommonJS so Jest can consume the source files directly.
 
 **Code coverage**
 
