@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact submissions</title>
     <link rel="stylesheet" href="dist/main.css" />
+    <!--
+    Using type="module" so we get native ES module support.
+    All target browsers (modern Chrome, Firefox, Safari, Edge) support this.
+    -->
+    <script type="module" src="js/app.js"></script>
   </head>
   <body>
     <!-- Skip link for keyboard users — jumps past the header to main content -->
@@ -32,7 +37,7 @@
 
         Tabindex="-1" tabindex=-1 allows programmatic focus on a 
         non-interactive element.
-      -->
+        -->
         <div
           id="error-summary"
           class="error-summary"
@@ -49,8 +54,8 @@
         <!--
         The form itself has no action or method attributes 
         as not relevant to this code test.
-      -->
-        <form id="contact-form" novalidate action="" method="post">
+        -->
+        <form id="contact-form" novalidate action="" method="">
           <div class="form-field" id="field-name">
             <label class="form-field__label" for="input-name">Full name</label>
             <span class="form-field__error" id="error-name" hidden></span>
@@ -116,7 +121,7 @@
         <!--
         Live region: announces changes (add/remove) to screen readers
         without stealing focus from whatever the user is doing.
-      -->
+        -->
         <div id="submissions-status" class="visually-hidden" aria-live="polite"></div>
 
         <p id="no-submissions" class="submissions-empty" hidden>
@@ -146,11 +151,5 @@
         >
       </div>
     </footer>
-
-    <!--
-    Using type="module" so we get native ES module support.
-    All target browsers (modern Chrome, Firefox, Safari, Edge) support this.
-  -->
-    <script type="module" src="js/app.js"></script>
   </body>
 </html>

@@ -61,7 +61,7 @@ function createSubmissionCard(submission) {
     details.appendChild(field);
   });
 
-  // Remove button
+  // Create remove button
   const removeBtn = document.createElement('button');
   removeBtn.type = 'button';
   removeBtn.classList.add('btn', 'btn--danger');
